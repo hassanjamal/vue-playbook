@@ -17,20 +17,30 @@
                     <input type="text" id="lastname" value="Jamal">
                     <button @click="saveLastName" class="btn btn-primary">Save Last Name</button> 
                     <output>{{ computedFullName}}</output>
+                    <h3>Array reactivity</h3>
+                    <input type="text" id="lastname" v-model="otherDetails[0]">
+                    <output>{{ computedOtherDetails}}</output>
                </div>
            </div>
        </div>
 </body>
 <script>
+    // Is declared at the beginning, external to our Vue instance - thus is not reactive
     let lastName = 'Jamal'
     new Vue({
         el: '#app',
         data: {
-            firstName: 'Hassan'
+            // firstName is declared in the data section of our object thus is reactive and affects the computed variable
+            firstName: 'Hassan',
+            otherDetails: ['Male', 'India']
         },
         computed:{
             computedFullName(){
                 return this.firstName+' '+lastName;
+            },
+            // This is not reactive 
+            computedOtherDetails(){
+                return this.otherDetails[0];
             }
         },
         methods: {  
@@ -40,5 +50,4 @@
         }
     })
 </script>
-
 </html>
